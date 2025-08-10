@@ -1,0 +1,200 @@
+:root, :root.dark {
+    --color-bg: #2b2b2b;
+    --color-fg: #dee5ff;
+    --color-btn: #2a318c;
+}
+
+#theme{
+    font-size: 30px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.toggle {
+    background-color: #607d8b;
+    color: #607d8b;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0; 
+    cursor: pointer;
+    z-index: 2;
+
+}
+
+.toggle_label {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 30px;
+}
+
+.slider {
+    bottom: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    bottom: 0;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    border: 5px solid white;
+    content: "";
+    height: 36px;
+    width: 36px;
+    right: 10px;
+    left: 7px;
+    top: 7px;
+    position: absolute;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.slider i {
+    position: absolute;
+    display: inline-block;
+    font-size: 18px;
+    color: #fff;
+    transition: opacity 0.4s;
+}
+
+.moon {
+    top: 29px;
+    left: 24px;
+}
+
+.sun {
+    top: 29px;
+    right: 21px;
+    opacity: 0;
+}
+
+input:checked+.slider {
+    background-color: #9ae6ff;
+}
+
+input:checked+.slider:before {
+    transform: translateX(140px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.toggle:checked+.slider .moon {
+    opacity: 0;
+}
+
+.toggle:checked+.slider .sun {
+    opacity: 1;
+    color: rgb(0, 0, 0);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-bg); /* Light pink */
+    color: var(--color-fg);
+}
+
+footer {
+    margin-top: 2%;
+    background-color: black; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 2%;
+    color: var(--color-fg);
+    font-size: 17px;
+
+}
+
+.footer-left span {
+  margin-right: 20px;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.rfooter {
+    margin-right: 2%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    background-color: #003366;
+}
+
+.navbar-brand, .nav-link, .navbar-text {
+    color: #ffffff !important;
+}
+
+.container-box {
+    background: #ffffff;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-heading {
+    color: #003366;
+    font-weight: bold;
+}
+
+.btn-custom {
+    background-color: #003366;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #002244;
+}
+
+.assignment-card {
+    border-left: 5px solid #003366;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f1f5f9;
+    position: relative;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.file-name {
+    font-size: 0.875rem;
+    color: #555;
+}

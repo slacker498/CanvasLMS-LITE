@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grading — Course {{ course_id }}</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"/>
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/facultyGrades.css') }}"/>
+</head>
+<body>
+  <nav class="navbar navbar-light bg-light mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand"
+         href="{{ url_for('course_page', course_id=course_id) }}"
+      >← Back to Course</a>
+      <span class="navbar-text">Grading Panel</span>
+      <a class="btn btn-sm btn-outline-secondary"
+         href="{{ url_for('logout') }}"
+      >Sign Out</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2 class="mb-4">Grade Students</h2>
+
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle">
+        <thead class="table-light">
+          <tr id="headerRow">
+            <th>Student Name</th>
+            <th>ID</th>
+            {# Assignment columns inserted by JS #}
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="gradeTableBody">
+          {# Rows inserted by JS #}
+        </tbody>
+      </table>
+    </div>
+
+    <button class="btn btn-primary mt-3" onclick="submitGrades()">
+      Save Grades
+    </button>
+  </div>
+
+<div id="gradesChart" style="height:400px;"></div>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+fetch("{{ url_for('grades_data', course_id=course_id) }}")
+  .then(r => r.json())
+  .then(data => {
+    const assignments = Object.keys(data);
+    const averages = Object.values(data);
+    Plotly.newPlot('gradesChart', [{
+      x: assignments,
+      y: averages,
+      type: 'bar'
+    }], {
+      title: 'Average Grades per Assignment',
+      yaxis: { title: 'Average Grade (%)' },
+      xaxis: { title: 'Assignment' }
+    });
+  });
+</script>
+  
+  <script>
+    // Injected by Flask
+    const courseId    = "{{ course_id }}";
+    const students    = "{{ students | tojson }}";
+    const assignments = "{{ assignments | tojson }}";
+    const existing    = "{{ existing | tojson }}";
+
+    // Helper to read numeric value
+    function getVal(el) {
+      return parseFloat(el.value) || 0;
+    }
+
+    // Create rows
+    const tbody = document.getElementById('gradeTableBody');
+    students.forEach(s => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${s.name}</td>
+        <td>${s.id}</td>
+        ${assignments.map(a => {
+          // pre-fill if existing grades
+          const val = existing[s.id] && existing[s.id][a.id] != null
+            ? existing[s.id][a.id]
+            : '';
+          const feedback = existing[s.id] && existing[s.id][`${a.id}_feedback`] != null
+            ? existing[s.id][`${a.id}_feedback`]
+            : '';
+          return `
+            <td>
+              <input
+                type="number" min="0" max="100"
+                class="form-control form-control-sm"
+                id="${s.id}-${a.id}"
+                value="${val}"
+                oninput="recalc('${s.id}')"
+              >
+              <input
+                type="text"
+                class="form-control form-control-sm mt-1"
+                id="${s.id}-${a.id}-feedback"
+                value="${feedback}"
+                placeholder="Feedback"
+              >
+            </td>`;
+        }).join('')}
+        <td id="${s.id}-total">0.00</td>
+      `;
+      tbody.appendChild(tr);
+      recalc(s.id);
+    });
+
+    // Recalculate a student’s total
+    function recalc(studentId) {
+      let sum = 0;
+      assignments.forEach(a => {
+        const el = document.getElementById(`${studentId}-${a.id}`);
+        sum += getVal(el);
+      });
+      document.getElementById(`${studentId}-total`).textContent = sum.toFixed(2);
+    }
+
+    // Collect and POST grades
+    function submitGrades() {
+    const payload = students.map(s => ({
+        id: s.id,
+        grades: assignments.reduce((g, a) => {
+        g[a.id] = parseFloat(
+            document.getElementById(`${s.id}-${a.id}`).value
+        ) || 0;
+        return g;
+        }, {})
+    }));
+
+    fetch(`/faculty/course/${courseId}/grading`, { /* or /faculty/${courseId}/grading */
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+        })
+        .then(r => {
+        if (!r.ok) {
+            // try to extract JSON error, or fallback
+            return r.json()
+            .then(err => { throw new Error(err.error || r.statusText) })
+            .catch(() => { throw new Error(r.statusText) });
+        }
+        return r.json();
+        })
+        .then(data => {
+        if (data.success) {
+            alert('Grades saved!');
+        } else {
+            throw new Error(data.error || 'Unknown server error');
+        }
+        })
+        .catch(err => {
+        console.error(err);
+        alert('Error saving grades: ' + err.message);
+        });
+            }
+
+      assignments.forEach(a => {
+  const th = document.createElement('th');
+  th.textContent = a.title + " (out of 100)";
+  headerRow.insertBefore(th, headerRow.lastElementChild);
+});
+
+
+  </script>
+</body>
+</html>

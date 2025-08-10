@@ -1,0 +1,28 @@
+1. P. Jeffrey and M. Gearey, Integrated water resources management: lost on the road from ambition to realisation?, 2006.
+
+2. M. Bruneau, S. E. Chang, R. T. Eguchi, G. C. Lee, T. D. ORourke, A. M. Reinhorn et al., "A framework to quantitatively assess and enhance the seismic resilience of communities", Earthquake spectra, vol. 19, pp. 733-752, 2003.
+
+3. J.-F. Crétaux, W. Jelinski, S. Calmant, A. Kouraev, V. Vuglinski, M. Bergé-Nguyen et al., "SOLS: A lake database to monitor in the Near Real Time water level and storage variations from remote sensing data", Advances in Space Research, vol. 47, pp. 1497-1507, 2011.
+
+4. R. Marin-Perez, J. García-Pintado and A. S. Gómez, "A real-time measurement system for long-life flood monitoring and warning applications", Sensors (Basel Switzerland), vol. 12, pp. 4213, 2012.
+
+5. J.-j. Yan, X.-w. Liu, X.-y. Zhu and B.-j. Yan, "Design of coal mine water level measuring and monitoring system based on wireless sensor networks [J]", Transducer and Microsystem Technologies, vol. 12, pp. 025, 2008.
+
+6. I. Singh and M. Bansal, "Monitoring Water Level in Agriculture Using Sensor Networks", International Journal of Soft Computing and Engineering (IJSCE) ISSN, pp. 2231-2307, 2011.
+
+7. P. Xuange, L. Peipei and H. Chunying, "One kind of water level monitor recording instrument", Industrial Electronics and Applications 2008. ICIEA 2008. 3rd IEEE Conference on, pp. 24-25, 2008.
+
+8. R. Ramani, S. Selvaraju, S. Valarmathy, R. Thangam and B. Rajasekaran, "water-level monitor for bore well and water tank based on GSM", International Journal of engineering science and technology (IJEST) ISSN, pp. 0975-5462, 2012.
+
+9. G. Lu, H. Hu, B. He and S. Chen, "A new-type sensor for monitoring oil-water interface level and oil level", Electronic Measurement  Instruments 2009. ICEMI09. 9th International Conference on 2009, pp. 2-981.
+
+10. C. Beckers, R. Franklin and T. Smith, "Sensor subsystem for the next generation tide and water level measurement system", OCEANS 81, pp. 1100-1105, 1981.
+
+11. Y. Dou, J. Qin and X. Chang, "The study of a capacitance sensor and its system used in measuring ice thickness sedimentation and water level of a reservoir", Information Technology and Applications 2009. IFITA09. International Forum on, pp. 616-619, 2009.
+
+12. I. Saputra and L. Hakim, "Perancangan Water Level Control Menggunakan PLC Omron Sysmac C200H Yang Dilengkapi Software SCADA Wonderware InTouch 10.5", Jurnal Informatika dan Teknik Elektro Terapan, vol. 1, 2013.
+
+13. Principle of Level Switch.
+
+14. Operating principle of Floatless Level Controller Controller.
+

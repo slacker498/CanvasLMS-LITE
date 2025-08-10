@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1",
+        "course_id": "1753379532",
+        "title": "Assignment 1",
+        "description": "Write an essay on why AI is the best thing ever",
+        "due_date": "2025-08-01",
+        "filename": "1753379532_asg1.txt"
+    },
+    {
+        "id": "2",
+        "course_id": "1753464537",
+        "title": "Business model",
+        "description": "hihihi",
+        "due_date": "2025-07-27",
+        "filename": null
+    }
+]

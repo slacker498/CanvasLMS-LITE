@@ -1,0 +1,104 @@
+:root, :root.dark {
+    --color-bg: #2b2b2b;
+    --color-fg: #dee5ff;
+    --color-btn: #2a318c;
+}
+
+#theme{
+    font-size: 30px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-bg); /* Light pink */
+    color: var(--color-fg);
+}
+
+footer {
+    margin-top: 2%;
+    background-color: black; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 2%;
+    color: var(--color-fg);
+    font-size: 17px;
+
+}
+
+.footer-left span {
+  margin-right: 20px;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.rfooter {
+    margin-right: 2%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    background-color: #003366;
+}
+
+.navbar-brand, .nav-link, .navbar-text {
+    color: #ffffff !important;
+}
+
+.container-box {
+    background: #ffffff;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-heading {
+    color: #003366;
+    font-weight: bold;
+}
+
+.btn-custom {
+    background-color: #003366;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #002244;
+}
+
+th, td {
+    vertical-align: middle !important;
+    text-align: center;
+}
+
+.grade-input {
+    width: 60px;
+}
+
+table input[type="number"] {
+    text-align: center;
+}

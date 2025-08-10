@@ -1,0 +1,155 @@
+:root.light {
+    --color-bg: #dee5ff;
+    --color-fg: #0d0d0d;
+    --color-btn: #2a318c;
+    --color-card: #fff;
+}
+
+:root.dark {
+    --color-bg: #23243a;
+    --color-fg: #f4f4f4;
+    --color-btn: #3f51b5;
+    --color-card: #2a2a3f;
+}
+
+#theme{
+    font-size: 30px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.toggle {
+    background-color: #607d8b;
+    color: #607d8b;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0; 
+    cursor: pointer;
+    z-index: 2;
+
+}
+
+.toggle_label {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 30px;
+}
+
+.slider {
+    bottom: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    bottom: 0;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    border: 5px solid rgb(17, 16, 16);
+    content: "";
+    height: 36px;
+    width: 36px;
+    right: 10px;
+    left: 7px;
+    top: 7px;
+    position: absolute;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.slider i {
+    position: absolute;
+    display: inline-block;
+    font-size: 18px;
+    color: #fff;
+    transition: opacity 0.4s;
+}
+
+.moon {
+    top: 29px;
+    left: 24px;
+}
+
+.sun {
+    top: 29px;
+    right: 21px;
+    opacity: 0;
+}
+
+input:checked+.slider {
+    background-color: #9ae6ff;
+}
+
+input:checked+.slider:before {
+    transform: translateX(140px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.toggle:checked+.slider .moon {
+    opacity: 0;
+}
+
+.toggle:checked+.slider .sun {
+    opacity: 1;
+    color: rgb(211, 224, 26);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-bg); /* Light pink */
+    color: var(--color-fg);
+}
+
+footer {
+    margin-top: 25%;
+    background-color: black; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 2%;
+    color: #ffffff;
+    font-size: 17px;
+
+}
+
+.footer-left span {
+  margin-right: 20px;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.rfooter {
+    margin-right: 2%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}

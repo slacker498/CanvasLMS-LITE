@@ -1,0 +1,262 @@
+/* Light and dark themes */
+
+:root, :root.dark {
+    --color-bg: #76484d;
+    --color-fg: #ffffff;
+    --btn-hover: #6b383f;
+    --color-btn: #76484d;
+    --color-link: white;
+    --color-link-hover: #6291a0;
+}
+
+:root.light {
+    --color-bg:#dadff1;
+    --color-fg: #0;
+    --color-btn: #2860cf;
+    --color-link: #2c6bed;
+    --color-link-hover: #0c2349;
+}
+
+#theme{
+    font-size: 30px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.toggle {
+    background-color: #506e7d;
+    color: #607d8b;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0; 
+    cursor: pointer;
+    z-index: 2;
+
+}
+
+.toggle_label {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    background-color: rgb(178, 119, 119);
+    border-radius: 30px;
+}
+
+.slider {
+    bottom: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    bottom: 0;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    border: 5px solid white;
+    content: "";
+    height: 36px;
+    width: 36px;
+    right: 10px;
+    left: 7px;
+    top: 7px;
+    position: absolute;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.slider i {
+    position: absolute;
+    display: inline-block;
+    font-size: 20px;
+    color: #fff;
+    transition: opacity 0.4s;
+}
+
+.moon {
+    top: 29px;
+    left: 24px;
+}
+
+.sun {
+    top: 29px;
+    right: 21px;
+    opacity: 0;
+}
+
+input:checked+.slider {
+    background-color: #9ae6ff;
+}
+
+input:checked+.slider:before {
+    transform: translateX(140px);
+}
+
+.slider.round {
+    border-radius: 30px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.toggle:checked+.slider .moon {
+    opacity: 0;
+}
+
+.toggle:checked+.slider .sun {
+    opacity: 1;
+    color: rgb(109, 79, 79);
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+}
+
+.login-box {
+    max-width: 400px;
+    background: rgba(254, 252, 252, 0.1);
+    margin: 60px auto;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow:  0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    backdrop-filter: blur(55px);
+}
+
+.login-box h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.login-box label {
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+    font-size: 14px;
+}
+
+.login-box input,
+.login-box select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.login-box button {
+    width: 48%;
+    padding: 12px;
+    margin: 10px 1%;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-btn);
+    color: var(--color-fg);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login-box button:hover {
+    background-color: #2c4686;
+}
+
+@media (max-width: 500px) {
+    .login-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .login-box button {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+
+a.btn-link {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: var(--color-btn);
+  color: var(--color-fg);
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+a.btn-link:hover {
+  background-color: var(--color-link-hover);
+}
+
+footer {
+    margin-top: 2%;
+    background-color: rgb(39, 38, 38); 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0.2px 2%;
+    color: var(--color-bg);
+    font-size: 12px;
+
+}
+
+.footer-left span {
+  margin-right: 20px;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rfooter {
+    margin-right: 2%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.flash-list li.error { color: red; }
+.flash-list li.success { color: green; }
+.flash-list li.info { color: blue; }
+
+.error-message {
+  margin-top: 4px;
+  display: block;
+}
+
+input:invalid {
+  border-color: crimson;
+}

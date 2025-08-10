@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Assignment</title>
+    <title>Submit Assignment - Canvas Lite</title>
+    <!-- Use Flask's url_for for static files -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stdAssignmentsPg.css') }}">
+</head>
+<body class="{{ session.get('theme', 'light') }}">
+ <!-- Navbar -->
+  <nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <div class="text-xl font-bold text-blue-700">Canvas Lite (Student)</div>
+    <ul class="flex space-x-6 font-medium">
+      <li><a href="{{ url_for('student_dashboard') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Dashboard</a></li>
+      <li><a href="{{ url_for('student_enrollment') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Enrollment</a></li>
+      <li><a href="{{ url_for('student_inbox') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Inbox</a></li>
+      <li><a href="#" onclick="openAccountModal()" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Account</a></li>
+      <li><a href="{{ url_for('logout') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Sign Out</a></li>
+    </ul>
+  </nav>
+
+<!-- Account Modal -->
+  <div id="accountModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden" style="display:none;">
+    <div class="bg-white p-6 rounded shadow w-80 modal-content">
+      <span class="close float-right text-xl cursor-pointer" onclick="closeAccountModal()">&times;</span>
+      <h2 class="text-lg font-bold mb-4">Account Info</h2>
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>ID:</strong> {{ user.user_id }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <button onclick="closeAccountModal()" class="bg-blue-600 text-white px-4 py-2 rounded w-full mt-4">Close</button>
+    </div>
+  </div>
+
+<div class="container">
+    <h2>Submit Assignment</h2>
+    <form method="POST" enctype="multipart/form-data">
+      <label>Assignment: {{ assignment.title }}</label><br>
+      <label>Description: {{ assignment.description }}</label><br>
+      <label>Due: {{ assignment.due_date }}</label><br>
+      <input type="file" name="submission" accept=".txt,.py" required>
+      <button type="submit">Submit</button>
+    </form>
+    {% if existing %}
+      <p class="text-green-600 mt-2">You have already submitted: {{ existing.filename }} at {{ existing.timestamp }}</p>
+    {% endif %}
+  </div>
+
+<script>
+    function submitAssignment() {
+        const fileInput = document.getElementById("assignment-file");
+        const message = document.getElementById("success-message");
+
+        if (fileInput.files.length === 0) {
+            alert("Please select a file before submitting.");
+        } else {
+            // Here you would normally send the file using form data to your server.
+            message.style.display = "block";
+        }
+    }
+</script>
+
+
+        <footer>
+        <span style="margin-right: 20px;">Echo -2025</span>
+        <div class="rfooter">
+            <span><a href="">About</a></span>
+            <span>Help</span>
+            <span>Change color theme</span>
+            <!-- Color theme -->
+            <div class="container">
+                <label class="toggle_label">
+                    <input type="checkbox" id="mode" class="toggle">
+                    <span class="slider round">
+                        <i class="fa-solid fa-moon fa-lg fa-spin moon"></i>
+                        <i class="fa-solid fa-sun fa-spin fa-lg sun"></i>
+                    </span>
+                </label>
+                <p id="theme"></p>
+            </div>
+        </div>
+    </footer>
+    <!-- Use Flask's url_for for static JS -->
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleInput = document.getElementById('mode');
+  const root = document.documentElement;
+  let theme = localStorage.getItem('theme') || 'light';
+  root.classList.remove('light', 'dark');
+  root.classList.add(theme);
+  toggleInput.checked = theme === 'light';
+  toggleInput.addEventListener('change', function() {
+    theme = toggleInput.checked ? 'light' : 'dark';
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  });
+});
+</script>
+</body>
+<script>
+  function openAccountModal() {
+    document.getElementById('accountModal').style.display = 'flex';
+  }
+  function closeAccountModal() {
+    document.getElementById('accountModal').style.display = 'none';
+  }
+</script>
+</html>

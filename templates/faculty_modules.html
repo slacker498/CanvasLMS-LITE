@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modules</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .navbar {
+      background-color: #003366;
+    }
+
+    .navbar-brand, .nav-link, .navbar-text {
+      color: #ffffff !important;
+    }
+
+    .container-box {
+      background: #ffffff;
+      padding: 30px;
+      margin-top: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-heading {
+      color: #003366;
+      font-weight: bold;
+    }
+
+    .btn-custom {
+      background-color: #003366;
+      color: white;
+    }
+
+    .btn-custom:hover {
+      background-color: #002244;
+    }
+
+    .module-card {
+      border-left: 5px solid #003366;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #f1f5f9;
+      position: relative;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .resource-list {
+      font-size: 0.875rem;
+      margin-top: 8px;
+    }
+
+    .resource-list li {
+      list-style: none;
+      padding: 4px 0;
+    }
+
+    .resource-list a {
+      text-decoration: none;
+      color: #004488;
+    }
+
+    .resource-list a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    {% if course_id %}
+      <a class="navbar-brand" href="{{ url_for('course_page', course_id=course_id) }}">← Back to Course</a>
+    {% else %}
+      <a class="navbar-brand" href="{{ url_for('faculty_dashboard') }}">← Back to Dashboard</a>
+    {% endif %}
+    <div class="d-flex">
+      <span class="navbar-text me-3">Modules</span>
+      <a class="btn btn-sm btn-light" href="{{ url_for('logout') }}">Sign Out</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="container-box">
+    <h2 class="section-heading mb-4">Manage Modules</h2>
+
+    <!-- Form to Add Module -->
+    {% if course_id %}
+    <form action="{{ url_for('modules.modules_page', course_id=course_id) }}" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="moduleTitle" class="form-label">Module Title</label>
+        <input
+          type="text"
+          id="moduleTitle"
+          name="moduleTitle"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="moduleDesc" class="form-label">Module Description</label>
+        <textarea
+          id="moduleDesc"
+          name="moduleDesc"
+          class="form-control"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="moduleFiles" class="form-label">
+          Upload Files (PY or txt)
+        </label>
+        <input type="file" id="moduleFiles" name="moduleFiles" class="form-control" multiple accept=".py,.txt" />
+      </div>
+
+      <button type="submit" class="btn btn-custom">Add Module</button>
+    </form>
+    {% else %}
+      <div class="alert alert-info">Select a specific course to add modules.</div>
+    {% endif %}
+
+    <hr/>
+
+    <!-- Modules Section -->
+    <h5 class="section-heading mt-4 mb-3">Modules</h5>
+    <div id="moduleList">
+  {% for mod in modules %}
+  <div class="module-card">
+    <h6>{{ mod.title }}</h6>
+    <p>{{ mod.description or 'No description.' }}</p>
+    {% if mod.files %}
+      <ul class="resource-list">
+      {% for file in mod.files %}
+        <li>📎
+          <a href="{{ url_for('static', filename='files/modules/' ~ file) }}" target="_blank">{{ file.split('/')[-1] }}</a>
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    <form method="POST"
+          action="{{ url_for('modules.delete_module', course_id=course_id, idx=loop.index0) }}"
+          class="delete-btn">
+      <button class="btn btn-sm btn-danger">Delete</button>
+    </form>
+  </div>
+  {% endfor %}
+</div>
+
+  </div>
+</div>
+
+<!-- <script>
+  const moduleForm = document.getElementById('moduleForm');
+  const moduleList = document.getElementById('moduleList');
+
+  moduleForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const title = document.getElementById('moduleTitle').value.trim();
+    const desc = document.getElementById('moduleDesc').value.trim();
+    const filesInput = document.getElementById('moduleFiles');
+    const files = Array.from(filesInput.files);
+
+    if (!title) return;
+
+    const card = document.createElement('div');
+    card.className = 'module-card';
+
+    let fileListHTML = '';
+    if (files.length > 0) {
+      fileListHTML = '<ul class="resource-list">';
+      files.forEach(file => {
+        const url = URL.createObjectURL(file);
+        fileListHTML += `<li>📎 <a href="${url}" target="_blank">${file.name}</a></li>`;
+      });
+      fileListHTML += '</ul>';
+    }
+
+    card.innerHTML = `
+      <h6>${title}</h6>
+      <p>${desc || '<em>No description provided.</em>'}</p>
+      ${fileListHTML}
+      <button class="btn btn-sm btn-danger delete-btn">Delete</button>
+    `;
+
+    card.querySelector('.delete-btn').addEventListener('click', function () {
+      card.remove();
+    });
+
+    moduleList.appendChild(card);
+    moduleForm.reset();
+  });
+</script> -->
+
+</body>
+</html>

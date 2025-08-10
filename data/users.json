@@ -1,0 +1,80 @@
+{
+    "12340000": {
+        "user_id": "12340000",
+        "name": "Jachin",
+        "email": "jachin.kpogli@ashesi.edu.gh",
+        "password": "$2b$12$rBMvo5PrAamg6PT5qabUA.J6wWIZLhW4WAks5AOcWpsgcVVXpzx22",
+        "role": "faculty",
+        "theme": "dark"
+    },
+    "24330000": {
+        "user_id": "24330000",
+        "name": "Leo",
+        "email": "mbofaiza@gmail.com",
+        "password": "$2b$12$UQ9GSrZ3B4IhCaqxLMK0F.dHcWSWR0d2nUYpBtrJEcPKGY2BC9VWy",
+        "role": "faculty",
+        "theme": "dark"
+    },
+    "56782028": {
+        "user_id": "56782028",
+        "name": "nasya",
+        "email": "jachin.kpogli@ashesi.edu.gh",
+        "password": "$2b$12$rkMbmxRtKoS7/mVcn.1ATOjluwvjMIvOOLndXfGPxqxcEyuluVIBO",
+        "role": "student",
+        "theme": "dark",
+        "enrolled_courses": [
+            "1753379532",
+            "1753464537"
+        ]
+    },
+    "11112028": {
+        "user_id": "11112028",
+        "name": "Faiza",
+        "email": "faizatu.safianu@ashesi.edu.gh",
+        "password": "$2b$12$0aDSgDdLXHLLiFX9lPBAbutsothKceiQ6rEn/BNvdxcOh092UWWaC",
+        "role": "student",
+        "theme": "dark",
+        "enrolled_courses": [
+            "1753464537",
+            "1753379532"
+        ]
+    },
+    "44502028": {
+        "user_id": "44502028",
+        "name": "lisa",
+        "email": "faizatu.safianu@ashesi.edu.gh",
+        "password": "$2b$12$8MUiGnJPzZMEL2.uc48Eo.XJ.EV7TB8mvArVZJcTbyxH5ys.W5.wO",
+        "role": "student",
+        "theme": "dark",
+        "enrolled_courses": [
+            "1753464537"
+        ]
+    },
+    "78890000": {
+        "user_id": "78890000",
+        "name": "teacher",
+        "email": "zakariaabusafianu89@gmail.com",
+        "password": "$2b$12$jAIY.eFi/cHtfai3Dfk4teuYy40BiUUF/jMB9jQ5QzpN3BGE65HHy",
+        "role": "faculty",
+        "theme": "dark"
+    },
+    "28492028": {
+        "user_id": "28492028",
+        "name": "28492028",
+        "email": "nasya.kpogli@ashesi.edu.gh",
+        "password": "$2b$12$pydq/2nO2bnydKHsg0lhOerjiDxCGGOBXuY1bpiEEJnvgLQLGzqQy",
+        "role": "student",
+        "theme": "dark",
+        "enrolled_courses": [
+            "1753464537"
+        ]
+    },
+    "28490000": {
+        "user_id": "28490000",
+        "name": "Nasya",
+        "email": "nasya.kpogli@ashesi.edu.gh",
+        "password": "$2b$12$AR/2C2wEyImD0baJSyrsauQ2A.8yXJOUPxg9I/cjbPNUXYc8z0ZFu",
+        "role": "faculty",
+        "theme": "dark"
+    }
+}

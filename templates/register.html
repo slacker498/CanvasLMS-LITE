@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>CANVAS-LITE</h2>
+        <h3>Register a new account</h3>
+        <form action="{{ url_for('register') }}" method="POST">
+            <label for="user_id" class="form-label">User ID</label>
+            <input type="text"
+                    id="user_id"
+                    name="user_id"
+                    placeholder="8-digit User ID"
+                    required
+                    data-pattern-student="^[0-9]{4}(2022|2023|2024|2025|2026|2027|2028)$"
+                    data-message-student="Student ID must end with a year between 2022 and 2028."
+                    data-pattern-faculty="^[0-9]{4}0000$"
+                    data-message-faculty="Faculty ID must be 8 digits and end with '0000'."
+            >
+
+            <label for="name">Username</label>
+            <input type="name" id="name" name="name" placeholder="Username" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+
+            <label for="role">Role</label>
+            <select id="role" name="role" required>
+                <option value="">Select Role</option>
+                <option value="student">Student</option>
+                <option value="faculty">Faculty</option>
+            </select>
+
+            <button type= "submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>
+<footer>
+    <span style="margin-right: 80%;">Echo -2025</span>
+    <span style="right: 100%;"><a href="">About</a></span>
+    <span>Help</span>
+    <button>Change color theme</button>
+</footer>
+<script src="../static/js/index.js"></script>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas-Lite Login</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>CANVAS-LITE</h2>
+        <h3>Login page</h3>
+        <form action="/login" method="POST">
+            <label for="user_id" class="form-label">User ID</label>
+            <input type="text"
+                    id="user_id"
+                    name="user_id"
+                    placeholder="8-digit User ID"
+                    required
+                    data-pattern-student="^[0-9]{4}(2022|2023|2024|2025|2026|2027|2028)$"
+                    data-message-student="Student ID must end with a year between 2022 and 2028."
+                    data-pattern-faculty="^[0-9]{4}0000$"
+                    data-message-faculty="Faculty ID must be 8 digits and end with '0000'."
+            >
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+
+            <label for="role">Role</label>
+            <select id="role" name="role" required>
+                <option value="">Select Role</option>
+                <option value="student">Student</option>
+                <option value="faculty">Faculty</option>
+            </select>
+
+            <button type="submit">Log in</button>
+            <button type="button" onclick="window.location.href='/register'">Register</button>
+            <span><a href="forgot_password.html" class="text-gray-700 hover:text-indigo-600">Forgot Password</a></span>
+        </form>
+    </div>
+</body>
+
+<footer>
+    <span style="margin-right: 20px;">Echo -2025</span>
+    <div class="rfooter">
+    <span style="right: 100%;"><a href="">About</a></span>
+    <span>Help</span>
+    <span>Change color theme</span>
+
+    <!-- Color theme -->
+    <div class="container">
+    <label class="toggle_label">
+        <input type="checkbox" id="mode" class="toggle">
+        <span class="slider round">
+        <i class="fa-solid fa-moon fa-lg fa-spin moon"></i>
+        <i class="fa-solid fa-sun fa-spin fa-lg sun"></i>
+        </span>
+    </label>
+    <p id="theme"></p>
+    </div>
+    </div>
+</footer>
+</html>
+<script src="../static/js/index.js"></script>
+<script>
+document.querySelector('form').addEventListener('submit', function(event) {
+  const userId = document.getElementById('user_id').value;
+  const password = document.getElementById('password').value;
+
+  const idRegex = /^\d{8}$/;
+  const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+  if (!idRegex.test(userId)) {
+    alert("User ID must be exactly 8 digits.");
+    event.preventDefault();
+    return;
+  }
+
+  if (!pwRegex.test(password)) {
+    alert("Password must be at least 8 characters, with uppercase, lowercase, digit, and special character.");
+    event.preventDefault();
+    return;
+  }
+});
+</script>

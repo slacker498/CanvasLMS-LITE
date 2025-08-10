@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Inbox</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <div class="text-xl font-bold text-blue-700">Canvas Lite (Faculty)</div>
+    <ul class="flex space-x-6 font-medium">
+      <li><a href="dashboard-faculty.html" class="hover:text-blue-600">Dashboard</a></li>
+      <li><a href="courses-faculty.html" class="hover:text-blue-600">Courses</a></li>
+      <li><a href="#" class="text-blue-600 border-b-2 border-blue-600">Inbox</a></li>
+      <li><a href="#" class="hover:text-blue-600">Account</a></li>
+      <li><a href="#" class="hover:text-red-500">Sign Out</a></li>
+    </ul>
+  </nav>
+
+  <main class="p-6">
+    <h2 class="text-2xl font-semibold mb-4">Messages from Students</h2>
+    <div id="message-list" class="space-y-4 mb-10">
+      <!-- Messages from students will appear here -->
+    </div>
+
+    <h2 class="text-2xl font-semibold mb-4">Send a Message to Student</h2>
+    <div class="bg-white p-6 rounded-lg shadow-md max-w-xl">
+      <label class="block mb-2 font-medium">Select Course:</label>
+      <select id="course-select" class="w-full p-2 border rounded mb-4"></select>
+
+      <label class="block mb-2 font-medium">Select Student:</label>
+      <select id="student-select" class="w-full p-2 border rounded mb-4"></select>
+
+      <label class="block mb-2 font-medium">Message:</label>
+      <textarea id="faculty-message" class="w-full p-2 border rounded mb-4" rows="4" placeholder="Type your message here..."></textarea>
+
+      <button onclick="sendFacultyMessage()" class="bg-blue-600 text-white px-4 py-2 rounded">Send Message</button>
+    </div>
+  </main>
+
+{% for msg in inbox %}
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h3 class="font-bold text-blue-700">{{ msg.course_id or 'General' }}</h3>
+    <p><strong>From:</strong> {{ msg.sender_id }}</p>
+    <p class="mt-2 text-gray-700">{{ msg.content }}</p>
+    <p class="text-sm text-gray-500 mt-1">{{ msg.timestamp }}</p>
+  </div>
+{% endfor %}
+
+{% for msg in replies %}
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <h3 class="font-bold text-blue-700">{{ msg.course_id or 'General' }}</h3>
+    <p><strong>From:</strong> {{ msg.sender_id }}</p>
+    <p class="mt-2 text-gray-700">{{ msg.text }}</p>
+    <p class="text-sm text-gray-500 mt-1">{{ msg.timestamp }}</p>
+  </div>
+{% endfor %}
+
+</body>
+
+</html>

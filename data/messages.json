@@ -1,0 +1,58 @@
+[
+    {
+        "sender_id": "56782028",
+        "recipient_id": "12340000",
+        "content": "Hello World",
+        "timestamp": "2025-07-26T01:08:52.388214"
+    },
+    {
+        "sender_id": "56782028",
+        "recipient_id": "12340000",
+        "content": "Hello World",
+        "timestamp": "2025-07-26T01:09:04.966673"
+    },
+    {
+        "sender_id": "11112028",
+        "recipient_id": "24330000",
+        "content": "HIII PRETTY",
+        "timestamp": "2025-07-26T01:20:20.550299"
+    },
+    {
+        "sender_id": "44502028",
+        "recipient_id": "12340000",
+        "content": "hbhjhj",
+        "timestamp": "2025-07-26T02:37:18.740613"
+    },
+    {
+        "sender_id": "11112028",
+        "recipient_id": "24330000",
+        "content": "ghxhxhghg",
+        "timestamp": "2025-07-26T03:02:02.015024"
+    },
+    {
+        "sender_id": "11112028",
+        "recipient_id": "78890000",
+        "content": "hihiiii",
+        "timestamp": "2025-07-26T13:47:21.463289"
+    },
+    {
+        "sender_id": "56782028",
+        "recipient_id": "78890000",
+        "content": "Hi Animal",
+        "timestamp": "2025-07-26T14:14:16.871370"
+    },
+    {
+        "sender_id": "11112028",
+        "recipient_id": "12340000",
+        "content": "hi",
+        "timestamp": "2025-07-26T15:48:58.206186"
+    },
+    {
+        "sender_id": "11112028",
+        "recipient_id": "12340000",
+        "content": "gvgg",
+        "timestamp": "2025-07-26T19:02:10.958958",
+        "sender_role": "student",
+        "recipient_role": "faculty"
+    }
+]

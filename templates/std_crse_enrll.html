@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enroll in Courses</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/stdCrses.css') }}">
+</head>
+<body class="{{ session.get('theme', 'light') }}">
+
+ <!-- Navbar -->
+  <nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <div class="text-xl font-bold text-blue-700">Canvas Lite (Student)</div>
+    <ul class="flex space-x-6 font-medium">
+      <li><a href="{{ url_for('student_dashboard') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Dashboard</a></li>
+      <li><a href="{{ url_for('student_enrollment') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Enrollment</a></li>
+      <li><a href="{{ url_for('student_inbox') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Inbox</a></li>
+      <li><a href="#" onclick="openAccountModal()" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Account</a></li>
+      <li><a href="{{ url_for('logout') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Sign Out</a></li>
+    </ul>
+  </nav>
+
+  <!-- Account Modal -->
+  <div id="accountModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden" style="display:none;">
+    <div class="bg-white p-6 rounded shadow w-80 modal-content">
+      <span class="close float-right text-xl cursor-pointer" onclick="closeAccountModal()">&times;</span>
+      <h2 class="text-lg font-bold mb-4">Account Info</h2>
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>ID:</strong> {{ user.user_id }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <button onclick="closeAccountModal()" class="bg-blue-600 text-white px-4 py-2 rounded w-full mt-4">Close</button>
+    </div>
+  </div>
+
+  <!-- Flash Messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="max-w-5xl mx-auto mt-6 space-y-2">
+        {% for category, msg in messages %}
+          <div
+            class="p-4 rounded {{ 'bg-green-100 text-green-800' if category=='success' else 'bg-red-100 text-red-800' }}"
+          >
+            {{ msg }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-5xl mx-auto mt-10 px-6">
+    <h2 class="text-3xl font-bold mb-6 text-center">Available Courses</h2>
+
+    <div id="coursesGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {# Start Jinja loop over courses passed from view #}
+      {% for course in courses %}
+        {# Determine if this course is already enrolled #}
+        {% set enrolled = course.code in current_codes %}
+
+        <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
+  <div>
+    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">{{ course.name }}</h3>
+    <p class="text-gray-700 dark:text-gray-300">Code: {{ course.code }}</p>
+    {% if course.description %}
+      <p class="mb-4 text-gray-700 dark:text-gray-300">{{ course.description }}</p>
+    {% endif %}
+  </div>
+
+  <form method="POST" action="{{ url_for('student_enrollment') }}">
+    <button
+      type="submit"
+      name="course_code"
+      value="{{ course.code }}"
+      class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+      {% if enrolled %}disabled{% endif %}
+    >
+      {{ 'Enrolled' if enrolled else 'Enroll' }}
+    </button>
+  </form>
+</div>
+
+      {% endfor %}
+    </div>
+  </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleInput = document.getElementById('mode');
+  const root = document.documentElement;
+  let theme = localStorage.getItem('theme') || 'light';
+  root.classList.remove('light', 'dark');
+  root.classList.add(theme);
+  toggleInput.checked = theme === 'light';
+  toggleInput.addEventListener('change', function() {
+    theme = toggleInput.checked ? 'light' : 'dark';
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  });
+});
+</script>
+</body>
+<script>
+  function openAccountModal() {
+    document.getElementById('accountModal').style.display = 'flex';
+  }
+  function closeAccountModal() {
+    document.getElementById('accountModal').style.display = 'none';
+  }
+</script>
+<footer>
+    <span style="margin-right: 20px;">Echo -2025</span>
+    <div class="rfooter">
+        <span><a href="#">About</a></span>
+        <span>Help</span>
+        <span>Change color theme</span>
+        <div class="container">
+            <label class="toggle_label">
+                <input type="checkbox" id="mode" class="toggle">
+                <span class="slider round">
+                    <i class="fa-solid fa-moon fa-lg fa-spin moon"></i>
+                    <i class="fa-solid fa-sun fa-spin fa-lg sun"></i>
+                </span>
+            </label>
+            <p id="theme"></p>
+        </div>
+    </div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleInput = document.getElementById('mode');
+  const root = document.documentElement;
+  // Set initial theme from localStorage
+  let theme = localStorage.getItem('theme') || 'light';
+  root.classList.remove('light', 'dark');
+  root.classList.add(theme);
+  toggleInput.checked = theme === 'light';
+
+  toggleInput.addEventListener('change', function() {
+    theme = toggleInput.checked ? 'light' : 'dark';
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  });
+});
+</script>
+</html>

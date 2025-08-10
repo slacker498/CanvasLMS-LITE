@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Canvas Lite (Student) - Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/stdDbrd.css') }}">
+</head>
+<body class="{{ session.get('theme', 'light') }}">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <div class="text-xl font-bold text-blue-700">Canvas Lite (Student)</div>
+    <ul class="flex space-x-6 font-medium">
+      <li><a href="{{ url_for('student_dashboard') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Dashboard</a></li>
+      <li><a href="{{ url_for('student_enrollment') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Enrollment</a></li>
+      <li><a href="{{ url_for('student_inbox') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Inbox</a></li>
+      <li><a href="#" onclick="openAccountModal()" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Account</a></li>
+      <li><a href="{{ url_for('logout') }}" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card">Sign Out</a></li>
+    </ul>
+  </nav>
+
+  <!-- Account Modal -->
+  <div id="accountModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden" style="display:none;">
+    <div class="bg-white p-6 rounded shadow w-80 modal-content">
+      <span class="close float-right text-xl cursor-pointer" onclick="closeAccountModal()">&times;</span>
+      <h2 class="text-lg font-bold mb-4">Account Info</h2>
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>ID:</strong> {{ user.user_id }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <button onclick="closeAccountModal()" class="bg-blue-600 text-white px-4 py-2 rounded w-full mt-4">Close</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="p-6">
+  <h1 class="block p-4 rounded-lg shadow-md hover:shadow-lg transition">Enrolled Courses</h1>
+
+  <div id="courses-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% if courses %}
+      {% for course in courses %}
+        <a
+          href="{{ url_for('student_course', course_id=course.id) }}"
+          class="block p-4 rounded-lg shadow-md hover:shadow-lg transition card"
+        >
+          <h3 class="text-lg font-bold">{{ course.name }}</h3>
+          <p class="text-sm text-gray-600">
+            {{ course.code }}&nbsp;–&nbsp;{{ course.semester or 'TBD' }}
+          </p>
+        </a>
+      {% endfor %}
+    {% else %}
+      <p class="text-gray-600">You are not enrolled in any courses yet.</p>
+    {% endif %}
+  </div>
+</main>
+
+{% for course in courses %}
+  <div id="progressChart-{{ course.code }}"></div>
+  <script>
+    fetch("{{ url_for('grades_data', course_id=course.code) }}")
+      .then(r => r.json())
+      .then(data => {
+        const assignments = Object.keys(data);
+        const grades = Object.values(data);
+        Plotly.newPlot('progressChart-{{ course.code }}', [{
+          x: assignments,
+          y: grades,
+          type: 'bar'
+        }], {
+          title: 'Your Progress for {{ course.name }}',
+          yaxis: { title: 'Grade (%)' },
+          xaxis: { title: 'Assignment' }
+        });
+      });
+  </script>
+{% endfor %}
+
+<script>
+  function openAccountModal() {
+    document.getElementById('accountModal').style.display = 'flex';
+  }
+  function closeAccountModal() {
+    document.getElementById('accountModal').style.display = 'none';
+  }
+</script>
+
+<footer>
+    <span style="margin-right: 20px;">Echo -2025</span>
+    <div class="rfooter">
+        <span><a href="#">About</a></span>
+        <span>Help</span>
+        <span>Change color theme</span>
+        <div class="container">
+            <label class="toggle_label">
+                <input type="checkbox" id="mode" class="toggle">
+                <span class="slider round">
+                    <i class="fa-solid fa-moon fa-lg fa-spin moon"></i>
+                    <i class="fa-solid fa-sun fa-spin fa-lg sun"></i>
+                </span>
+            </label>
+            <p id="theme"></p>
+        </div>
+    </div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleInput = document.getElementById('mode');
+  const root = document.documentElement;
+  let theme = localStorage.getItem('theme') || 'light';
+  root.classList.remove('light', 'dark');
+  root.classList.add(theme);
+  toggleInput.checked = theme === 'light';
+  toggleInput.addEventListener('change', function() {
+    theme = toggleInput.checked ? 'light' : 'dark';
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  });
+});
+</script>
+</body>
+</html>

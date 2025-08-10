@@ -1,0 +1,203 @@
+:root.light {
+  --color-bg: #dee5ff;
+  --color-fg: #1a1a1a;
+  --color-btn: #2a318c;
+  --color-card: #ffffff;
+}
+
+:root.dark {
+  --color-bg: #23243a;
+  --color-fg: #f4f4f4;
+  --color-btn: #3f51b5;
+  --color-card: #2a2a3f;
+}
+
+.dark .block, 
+.dark .block h3, 
+.dark .block p {
+  color: var(--color-fg) !important;  /* Ensure text is the defined foreground color */
+  font-weight: 600; /* optional: make text bolder */
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+h2 {
+  text-align: center;
+  color: #002147;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+form {
+  background: var(--color-card);
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #003366;
+  margin-bottom: 0.4rem;
+}
+
+.form-control {
+  border: 1px solid #cfd8dc;
+  border-radius: 7px;
+  padding: 0.7rem;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  background-color: #fff;
+  color: #000;
+}
+
+.form-control:focus {
+  border-color: #002147;
+  outline: none;
+}
+
+button[type="submit"],
+button,
+.btn {
+  background: var(--color-btn);
+  color: white;
+  border: none;
+  padding: 0.8rem 0;
+  border-radius: 7px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+
+button:hover,
+.btn:hover {
+  background: #003366;
+}
+
+/* Footer */
+footer {
+  background: #002147;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  margin-top: auto;
+}
+
+.rfooter {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.rfooter a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.rfooter a:hover {
+  text-decoration: underline;
+}
+
+/* Theme Toggle */
+.toggle_label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.toggle {
+  position: absolute;
+  opacity: 0;
+}
+
+.slider.round {
+  position: relative;
+  width: 42px;
+  height: 22px;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.2s;
+  display: inline-block;
+}
+
+.slider.round::before {
+  content: "";
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggle:checked + .slider.round {
+  background-color: #003366;
+}
+
+.toggle:checked + .slider.round::before {
+  transform: translateX(20px);
+}
+
+#theme {
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+/* Card and Container */
+.card,
+.container {
+  background-color: var(--color-card);
+  color: var(--color-fg);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Course Box Enhancements */
+.course-box {
+  background-color: var(--color-card);
+  color: var(--color-fg);
+  border: 1px solid #cfd8dc;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.course-box:hover {
+  background-color: #f0f4ff;
+}

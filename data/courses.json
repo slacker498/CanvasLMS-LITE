@@ -1,0 +1,30 @@
+{
+    "1753379532": {
+        "id": "1753379532",
+        "name": "Computer Programming for Engineering",
+        "description": "This course is meant to make students miserable and hate what they once loved, \"Programming\". Promotes the reliance on AI and that is what we as Ashesi Faculty want.",
+        "modules": [
+            {
+                "title": "Final Project",
+                "description": "Stresful",
+                "files": [
+                    "1753379532/1753379532_1753531180_module1.txt"
+                ]
+            }
+        ]
+    },
+    "1753464537": {
+        "id": "1753464537",
+        "name": "FDE",
+        "description": "Make students have everlasting group meetings for the whole first year.",
+        "modules": [
+            {
+                "title": "trial",
+                "description": "hiiiii",
+                "files": [
+                    "1753464537/1753464537_1753537484_IEEE_Xplore_Reference_Download_2025.2.9.14.21.25.txt"
+                ]
+            }
+        ]
+    }
+}
