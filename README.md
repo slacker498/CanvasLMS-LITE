@@ -1,3 +1,5 @@
+NB:// This project was created under pressure with time constraints and hence many bugs and involved the use of AI (not proud of this). Though, we aim to learn to devlop such systems in the future without its use.
+
 CanvasLMS-Lite is a lightweight, scalable Learning Management System (LMS) built using Python. It is designed to replicate core features of Canvas, supporting role-based access for faculty and students. Key functionalities include assignment creation, submission, grading, simulated notifications, and messaging. This project emphasizes usability, security, and extensibility while leveraging standard Python libraries and simple file-based (JSON and text) data management. The system may also incorporate innovative features to enhance the learning experience, such as gamification and analytics dashboards.
 
 Key Features:
@@ -44,3 +46,6 @@ Flask aided in creation of the dashboard. It also aided in input validation.
 We also had to route each of the pages to unique URLs.
 Our GUI allows Students to enable Theme Customization. Users can toggle between Light and Dark themes.
 JSON files allow us to store information such as course data, student data etc.
+
+
+Link to LinkedIn Post: https://www.linkedin.com/posts/faizatu_canvaslmslite-cs112-ashesiuniversity-ugcPost-7357752919128956928-W5UB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFeX7YIBQKNk_bDCWVGzVF5vAUyz27y948g
